@@ -2,7 +2,7 @@
     <body>
         <span id="message"></span>
         <script>
-            window.addEventListener('my test message', msgHandler);
+            window.addEventListener('message', msgHandler);
 
             function msgHandler(event) {
                 document.getElementById("message").textContent = event.origin + " says: " + event.data;
