@@ -1,11 +1,12 @@
 <html>
     <body>
-        <select><script>
+        <span id="message"></span>
+        <script>
+            window.addEventListener('my test message', msgHandler);
 
-            document.write("<OPTION value=1>"+document.location.href.substring(document.location.href.indexOf("#default=")+9)+"</OPTION>");
-            
-            document.write("<OPTION value=2>English</OPTION>");
-            
-            </script></select>
+            function msgHandler(event) {
+                document.getElementById("message").textContent = event.origin + " says: " + event.data;
+            }
+        </script>
     </body>
 </html>
