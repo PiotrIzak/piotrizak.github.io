@@ -12,7 +12,7 @@
 	var encodedToken = encodeURI(token);
 	*/
 	
-	fetch('https://preprod.hub.knightfrank.com/api/signalr/negotiate?clientProtocol=2.0&impersonatedUserID=&connectionData=%5B%7B%22name%22%3A%22notificationshub%22%7D%5D', {mode: 'no-cors'})
+	fetch('https://preprod.hub.knightfrank.com/api/signalr/negotiate?clientProtocol=2.0&impersonatedUserID=&connectionData=%5B%7B%22name%22%3A%22notificationshub%22%7D%5D', {mode: 'no-cors', credentials: 'include'});
 	.then((resp) => {
 		console.log(resp.json());
 	})
