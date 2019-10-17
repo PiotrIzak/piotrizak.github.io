@@ -2,20 +2,23 @@
 <body>
 <script>
 
-try{
-	await go();
-}
-catch(error){
-	console.log(error);
-}
 
-async function go(){
+/*
 	const response = await fetch('https://preprod.hub.knightfrank.com/api/signalr/negotiate?clientProtocol=2.0&impersonatedUserID=&connectionData=%5B%7B%22name%22%3A%22notificationshub%22%7D%5D', {mode: 'no-cors'});
 	const data = await response.json();
 	var r = JSON.stringify(data);
 	
 	var token = r.ConnectionToken;
 	var encodedToken = encodeURI(token);
+	*/
+	
+	fetch('https://preprod.hub.knightfrank.com/api/signalr/negotiate?clientProtocol=2.0&impersonatedUserID=&connectionData=%5B%7B%22name%22%3A%22notificationshub%22%7D%5D', {mode: 'no-cors'});
+	.then((resp) => {
+		console.log(resp.json());
+	})
+	.catch((err) => {
+		console.log(err);
+	});
 
   var webSocket = new WebSocket("wss://preprod.hub.knightfrank.com/api/signalr/connect?transport=webSockets&clientProtocol=2.0&impersonatedUserID=&connectionToken="+encodedToken+"&connectionData=%5B%7B%22name%22%3A%22notificationshub%22%7D%5D&tid=5", {mode: 'no-cors'});
   
@@ -26,7 +29,7 @@ async function go(){
       var message = evt.data;
 		console.log(message);
   }
-}
+
 </script>
 </body>
 </html>
