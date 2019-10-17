@@ -36,14 +36,14 @@
         //});
 
 
-            $.post("http://objcors.azurewebsites.net/api/Values", { value: "Some test data" }, function (data) {
+            $.post("https://objcors.azurewebsites.net/api/Values", { value: "Some test data" }, function (data) {
                 $("#postResult").text(data);
             },  "json" );
         }
 
         function invokePUT() {
             $.ajax({
-                url: 'http://objcors.azurewebsites.net/api/Values/1',
+                url: 'https://objcors.azurewebsites.net/api/Values/1',
                 type: 'PUT',
                 data: { value: "Some test data" },
                 success: function (data) {
@@ -54,7 +54,7 @@
 
         function invokeDELETE() {
             $.ajax({
-                url: 'http://objcors.azurewebsites.net/api/Values/1',
+                url: 'https://objcors.azurewebsites.net/api/Values/1',
                 type: 'DELETE',
                 success: function (data) {
                     $("#deleteResult").text(data);
