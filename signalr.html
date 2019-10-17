@@ -3,14 +3,14 @@
 <script>
 (function(){
 
-	const response = await fetch('https://preprod.hub.knightfrank.com/api/signalr/negotiate?clientProtocol=2.0&impersonatedUserID=&connectionData=%5B%7B%22name%22%3A%22notificationshub%22%7D%5D');
+	const response = await fetch('https://preprod.hub.knightfrank.com/api/signalr/negotiate?clientProtocol=2.0&impersonatedUserID=&connectionData=%5B%7B%22name%22%3A%22notificationshub%22%7D%5D', {mode: 'no-cors'});
 	const data = await response.json();
 	var r = JSON.stringify(data);
 	
 	var token = r.ConnectionToken;
 	var encodedToken = encodeURI(token);
 
-  var webSocket = new WebSocket("wss://preprod.hub.knightfrank.com/api/signalr/connect?transport=webSockets&clientProtocol=2.0&impersonatedUserID=&connectionToken="+encodedToken+"&connectionData=%5B%7B%22name%22%3A%22notificationshub%22%7D%5D&tid=5");
+  var webSocket = new WebSocket("wss://preprod.hub.knightfrank.com/api/signalr/connect?transport=webSockets&clientProtocol=2.0&impersonatedUserID=&connectionToken="+encodedToken+"&connectionData=%5B%7B%22name%22%3A%22notificationshub%22%7D%5D&tid=5", {mode: 'no-cors'});
   
   webSocket.onopen = function (evt) {
       webSocket.send("READY")
