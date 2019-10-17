@@ -3,7 +3,7 @@
 <script>
 (function(){
 
-	var response = await fetch('https://preprod.hub.knightfrank.com/api/signalr/negotiate?clientProtocol=2.0&impersonatedUserID=&connectionData=%5B%7B%22name%22%3A%22notificationshub%22%7D%5D');
+	var response = fetch('https://preprod.hub.knightfrank.com/api/signalr/negotiate?clientProtocol=2.0&impersonatedUserID=&connectionData=%5B%7B%22name%22%3A%22notificationshub%22%7D%5D');
 	var data = await response.json();
 	var r = JSON.stringify(data);
 	
