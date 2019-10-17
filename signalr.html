@@ -2,19 +2,24 @@
 <body>
 <script>
 	(function(){
-			var encodedToken = '';
+			
+			var host = "perftest.hub.knightfrank.com";
 	
-		fetch('https://preprod.hub.knightfrank.com/api/signalr/negotiate?clientProtocol=2.0&impersonatedUserID=&connectionData=%5B%7B%22name%22%3A%22notificationshub%22%7D%5D', {credentials: 'include'})
+		fetch('http://' + host+ '/api/signalr/negotiate?clientProtocol=2.0&impersonatedUserID=&connectionData=%5B%7B%22name%22%3A%22notificationshub%22%7D%5D', {credentials: 'include'})
 		.then(response => {
 			return response.json();
-			
-		  /*response.json().then(data => {
-			console.log(data.ConnectionToken);
-			var encodedToken = encodeURI(data.ConnectionToken);
-			return data.ConnectionToken;*/
 		 })
-		.then(data => {
-			encodedToken = encodeURI(data.ConnectionToken);
+		.then(data => {  
+	  
+		new WebSocket("ws://"+host+"/api/signalr/connect?transport=webSockets&clientProtocol=2.0&impersonatedUserID=&connectionToken="+encodeURIComponent(data.ConnectionToken)+"&connectionData=%5B%7B%22name%22%3A%22notificationshub%22%7D%5D&tid=3")
+	  
+		  webSocket.onopen = function (evt) {
+			  webSocket.send("READY")
+		  }
+		  webSocket.onmessage = function (evt) {
+			  var message = evt.data;
+				console.log(message);
+		  }
 		})
 		.catch((err) => {
 			console.log(err);
@@ -23,15 +28,7 @@
 
 	
 	
-	  var webSocket = new WebSocket("wss://preprod.hub.knightfrank.com/api/signalr/connect?transport=webSockets&clientProtocol=2.0&impersonatedUserID=&connectionToken="+encodedToken+"&connectionData=%5B%7B%22name%22%3A%22notificationshub%22%7D%5D&tid=5", {credentials: 'include'});
 	  
-	  webSocket.onopen = function (evt) {
-		  webSocket.send("READY")
-	  }
-	  webSocket.onmessage = function (evt) {
-		  var message = evt.data;
-			console.log(message);
-	  }
 	})();
 
 	
