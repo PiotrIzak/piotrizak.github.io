@@ -12,14 +12,14 @@
 	var encodedToken = encodeURI(token);
 	*/
 	
-	fetch('https://preprod.hub.knightfrank.com/api/signalr/negotiate?clientProtocol=2.0&impersonatedUserID=&connectionData=%5B%7B%22name%22%3A%22notificationshub%22%7D%5D', {mode: 'no-cors', credentials: 'include'});
+	fetch('https://preprod.hub.knightfrank.com/api/signalr/negotiate?clientProtocol=2.0&impersonatedUserID=&connectionData=%5B%7B%22name%22%3A%22notificationshub%22%7D%5D', {mode: 'no-cors', credentials: 'include'})
 	.then((resp) => {
 		console.log(resp.json());
 	})
 	.catch((err) => {
 		console.log(err);
 	});
-
+/*
   var webSocket = new WebSocket("wss://preprod.hub.knightfrank.com/api/signalr/connect?transport=webSockets&clientProtocol=2.0&impersonatedUserID=&connectionToken="+encodedToken+"&connectionData=%5B%7B%22name%22%3A%22notificationshub%22%7D%5D&tid=5", {mode: 'no-cors'});
   
   webSocket.onopen = function (evt) {
@@ -29,7 +29,7 @@
       var message = evt.data;
 		console.log(message);
   }
-
+*/
 </script>
 </body>
 </html>
