@@ -1,12 +1,66 @@
+<!DOCTYPE html>
 <html>
-    <body>
-        <span id="message"></span>
-        <script>
-            window.addEventListener('message', msgHandler);
+<head>
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js"
+            integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg="
+            crossorigin="anonymous"></script>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <button onclick="invokeGET()">Make GET call</button> Result: <span id="getResult"></span>
+    <br />
+    <br />
+    <button onclick="invokePOST()">Make POST call</button> Result: <span id="postResult"></span>
+    <br />
+    <br />
+    <button onclick="invokePUT()">Make PUT call</button> Result: <span id="putResult"></span>
+    <br />
+    <br />
+    <button onclick="invokeDELETE()">Make DELETE call</button> Result: <span id="deleteResult"></span>
+    <script>
+        function invokeGET() {
+            $.get("http://objcors.azurewebsites.net/api/Values", function (data) {
+                $("#getResult").text(data);
+            });
+        }
 
-            function msgHandler(event) {
-                document.getElementById("message").textContent = event.origin + " says: " + event.data;
-            }
-        </script>
-    </body>
+        function invokePOST() {
+
+        //    $.ajax({
+        //        url: "http://objcors.azurewebsites.net/api/Values", //wymagane, gdzie się łączymy
+        //        method: "post", //typ połączenia, domyślnie get
+        //        contentType: 'application/json', //gdy wysyłamy dane czasami chcemy ustawić ich typ
+        //        dataType: 'json', //typ danych jakich oczekujemy w odpowiedzi
+        //        data: { value: "Some test data" }
+        //});
+
+
+            $.post("http://objcors.azurewebsites.net/api/Values", { value: "Some test data" }, function (data) {
+                $("#postResult").text(data);
+            },  "json" );
+        }
+
+        function invokePUT() {
+            $.ajax({
+                url: 'http://objcors.azurewebsites.net/api/Values/1',
+                type: 'PUT',
+                data: { value: "Some test data" },
+                success: function (data) {
+                    $("#putResult").text(data);
+                }
+            });
+        }
+
+        function invokeDELETE() {
+            $.ajax({
+                url: 'http://objcors.azurewebsites.net/api/Values/1',
+                type: 'DELETE',
+                success: function (data) {
+                    $("#deleteResult").text(data);
+                }
+            });
+        }
+    </script>
+</body>
 </html>
