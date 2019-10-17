@@ -3,7 +3,7 @@
 <script>
 (function(){
 
-  var webSocket = new WebSocket("wss://preprod.hub.knightfrank.com/api/signalr/connect?transport=webSockets&clientProtocol=2.0&impersonatedUserID=&connectionToken=iolfGP+v6CFRIcWrsb79zE9VVBIr0DGssOiFDdryvbR+gF46hbBcYZuXBWtmKF7npMEn0XSxUlzjne9V1UK9VHuCD2zhsQbOqMa+/IuuUK/VlvMcjKmhtXjxvuCn7tjtxnafd7rwYF7pBweXUniSvg==&connectionData=[{'name':'notificationshub'}]");
+  var webSocket = new WebSocket("wss://preprod.hub.knightfrank.com/api/signalr/connect?transport=webSockets&clientProtocol=2.0&impersonatedUserID=&connectionToken=OFS1ZdqzAsrmHm9myJvb%2B%2F6QA82vY4pGV05clMQMOBgEE0rDVPIasScc6Mcduw%2BJphCDWh1AJGPX7drzTSN25zaEczIM5phESmIhJAKluuKoIDWLdtVzmIchySiGyKVPHk3%2FNdOxAoGbsuWqABfJ%2Bg%3D%3D&connectionData=%5B%7B%22name%22%3A%22notificationshub%22%7D%5D&tid=5");
   
   webSocket.onopen = function (evt) {
       webSocket.send("READY")
