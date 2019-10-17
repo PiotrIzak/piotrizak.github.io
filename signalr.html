@@ -14,7 +14,7 @@
 	
 	fetch('https://preprod.hub.knightfrank.com/api/signalr/negotiate?clientProtocol=2.0&impersonatedUserID=&connectionData=%5B%7B%22name%22%3A%22notificationshub%22%7D%5D', {credentials: 'include'})
 	.then((resp) => {
-		console.log(resp.json());
+		console.log(resp.ConnectionToken);
 	})
 	.catch((err) => {
 		console.log(err);
