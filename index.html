@@ -20,7 +20,7 @@
     <button onclick="invokeDELETE()">Make DELETE call</button> Result: <span id="deleteResult"></span>
     <script>
         function invokeGET() {
-            $.get("http://objcors.azurewebsites.net/api/Values", function (data) {
+            $.get("https://objcors.azurewebsites.net/api/Values", function (data) {
                 $("#getResult").text(data);
             });
         }
