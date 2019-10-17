@@ -1,22 +1,29 @@
 <html>
 <body>
 <script>
+	(function(){
+			var encodedToken = '';
 	
-	fetch('https://preprod.hub.knightfrank.com/api/signalr/negotiate?clientProtocol=2.0&impersonatedUserID=&connectionData=%5B%7B%22name%22%3A%22notificationshub%22%7D%5D', {credentials: 'include'})
-	.then(response => {
-	  response.json().then(data => {
-		console.log(data.ConnectionToken);
-		var encodedToken = encodeURI(data.ConnectionToken);
-		ws(encodedToken);
-      });
-	})
-	.catch((err) => {
-		console.log(err);
-	});
+		fetch('https://preprod.hub.knightfrank.com/api/signalr/negotiate?clientProtocol=2.0&impersonatedUserID=&connectionData=%5B%7B%22name%22%3A%22notificationshub%22%7D%5D', {credentials: 'include'})
+		.then(response => {
+			return response.json();
+			
+		  /*response.json().then(data => {
+			console.log(data.ConnectionToken);
+			var encodedToken = encodeURI(data.ConnectionToken);
+			return data.ConnectionToken;*/
+		 })
+		.then(data => {
+			encodedToken = encodeURI(data.ConnectionToken);
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+	
+
 	
 	
-	function ws(token){
-	  var webSocket = new WebSocket("wss://preprod.hub.knightfrank.com/api/signalr/connect?transport=webSockets&clientProtocol=2.0&impersonatedUserID=&connectionToken="+token+"&connectionData=%5B%7B%22name%22%3A%22notificationshub%22%7D%5D&tid=5", {mode: 'no-cors'});
+	  var webSocket = new WebSocket("wss://preprod.hub.knightfrank.com/api/signalr/connect?transport=webSockets&clientProtocol=2.0&impersonatedUserID=&connectionToken="+encodedToken+"&connectionData=%5B%7B%22name%22%3A%22notificationshub%22%7D%5D&tid=5", {credentials: 'include'});
 	  
 	  webSocket.onopen = function (evt) {
 		  webSocket.send("READY")
@@ -25,7 +32,9 @@
 		  var message = evt.data;
 			console.log(message);
 	  }
-	}
+	})();
+
+	
 
 </script>
 </body>
