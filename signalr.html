@@ -3,7 +3,7 @@
 <script>
 (function(){
 
-  var webSocket = new WebSocket("wss://preprod.hub.knightfrank.com/api/signalr/connect");
+  var webSocket = new WebSocket("wss://preprod.hub.knightfrank.com/api/signalr/connect?transport=webSockets&clientProtocol=2.0&impersonatedUserID=");
   
   webSocket.onopen = function (evt) {
       webSocket.send("READY")
